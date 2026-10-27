@@ -1,0 +1,16 @@
+{
+  "nav": {
+    "home": "Home",
+    "projects": "Projects",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Frontend Developer",
+    "tagline": "I build clear, fast, and accessible web applications for local businesses.",
+    "cta": "See my projects"
+  },
+  "projects": {
+    "title": "My Projects"
+  }
+}

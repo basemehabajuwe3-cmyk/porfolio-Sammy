@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+  <title id="title">SmartResto</title>
+  <desc id="desc">Illustration du projet SmartResto.</desc>
+  <rect width="640" height="360" rx="24" fill="#fff7ed"/>
+  <rect x="82" y="72" width="476" height="210" rx="24" fill="#f97316" fill-opacity="0.12"/>
+  <rect x="118" y="110" width="200" height="128" rx="18" fill="#f97316"/>
+  <rect x="344" y="110" width="178" height="32" rx="10" fill="#fdba74"/>
+  <rect x="344" y="160" width="156" height="18" rx="9" fill="#fed7aa"/>
+  <rect x="344" y="194" width="136" height="18" rx="9" fill="#fed7aa"/>
+  <rect x="118" y="258" width="176" height="18" rx="9" fill="#f59e0b"/>
+  <path d="M476 96L560 96L560 242L476 242" fill="none" stroke="#f97316" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
