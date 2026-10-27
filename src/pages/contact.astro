@@ -1,0 +1,58 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Contact | Sammy Habajuwe"
+  description="Contactez Sammy Habajuwe pour une mission, un projet ou une collaboration web."
+>
+  <section class="container mx-auto px-4 py-20 md:py-24">
+    <div class="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:items-start">
+      <div>
+        <p class="text-sm font-semibold uppercase tracking-[0.2em] text-primary">Contact</p>
+        <h1 class="mt-3 text-4xl font-black text-foreground md:text-5xl">Parlons de votre projet.</h1>
+        <p class="mt-5 text-lg leading-8 text-muted">
+          Vous avez une idée, un besoin de refonte ou un produit à lancer ? Je peux vous aider à le transformer en solution claire, rapide et utile.
+        </p>
+
+        <div class="mt-8 space-y-4">
+          <a href="mailto:basemehabajuwe3@gmail.com" class="flex items-center gap-3 rounded-xl border border-border bg-card p-4 text-foreground shadow-sm hover:border-primary">
+            <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">✉</span>
+            <span>sammyahabajuwe@gmail.com</span>
+          </a>
+          <a href="https://github.com/sammyahabajuwe" target="_blank" rel="noreferrer" class="flex items-center gap-3 rounded-xl border border-border bg-card p-4 text-foreground shadow-sm hover:border-primary">
+            <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">GH</span>
+            <span>github.com/basemehabajuwe3-cmyk</span>
+          </a>
+          <a href="https://www.linkedin.com/in/samy Bseme/" target="_blank" rel="noreferrer" class="flex items-center gap-3 rounded-xl border border-border bg-card p-4 text-foreground shadow-sm hover:border-primary">
+            <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">in</span>
+            <span>linkedin.com/in/sammy-Habajuwe</span>
+          </a>
+        </div>
+      </div>
+
+      <form action="mailto:basemehabajuwe3@gmail.com" method="post" enctype="text/plain" class="rounded-3xl border border-border bg-card p-6 shadow-sm md:p-8">
+        <div class="grid gap-5">
+          <div>
+            <label for="name" class="mb-2 block text-sm font-medium text-foreground">Nom</label>
+            <input id="name" name="name" type="text" class="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground outline-none transition focus:border-primary" placeholder="Votre nom" />
+          </div>
+
+          <div>
+            <label for="email" class="mb-2 block text-sm font-medium text-foreground">Email</label>
+            <input id="email" name="email" type="email" class="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground outline-none transition focus:border-primary" placeholder="votre@email.com" />
+          </div>
+
+          <div>
+            <label for="message" class="mb-2 block text-sm font-medium text-foreground">Message</label>
+            <textarea id="message" name="message" rows="6" class="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground outline-none transition focus:border-primary" placeholder="Dites-moi en quoi je peux vous aider..."></textarea>
+          </div>
+
+          <button type="submit" class="inline-flex items-center justify-center rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-white transition hover:bg-primary/90">
+            Envoyer le message
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+</Layout>
