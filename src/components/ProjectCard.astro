@@ -1,0 +1,65 @@
+
+---
+import type { Project } from '../data/projects';
+import type { Locale } from '../i18n';
+
+export interface Props {
+  project: Project;
+  locale?: Locale;
+}
+
+const { project, locale = 'fr' } = Astro.props;
+const projectDescription = locale === 'en' ? project.descriptionEn ?? project.description : project.description;
+const imageAlt = locale === 'fr' ? `Capture du projet ${project.title}` : `Screenshot of the ${project.title} project`;
+const githubLabel = locale === 'fr' ? `Voir le repository GitHub de ${project.title}` : `View the ${project.title} GitHub repository`;
+const demoLabel = locale === 'fr' ? `Voir la démonstration de ${project.title}` : `View the ${project.title} demo`;
+const demoText = locale === 'fr' ? 'Démo' : 'Live demo';
+---
+<article class="group flex h-full flex-col gap-4 rounded-2xl border border-border bg-card p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/60 hover:shadow-md">
+  <div class="overflow-hidden rounded-xl bg-muted/10">
+    <img
+      src={project.image}
+      alt={imageAlt}
+      width="600"
+      height="338"
+      loading="lazy"
+      class="h-52 w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+    />
+  </div>
+
+  <div class="flex flex-1 flex-col gap-3">
+    <h3 class="text-xl font-semibold text-foreground">{project.title}</h3>
+    <p class="text-sm leading-6 text-muted">{projectDescription}</p>
+
+    <div class="flex flex-wrap gap-2">
+      {project.technologies.map((tech) => (
+        <span class="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+          {tech}
+        </span>
+      ))}
+    </div>
+  </div>
+
+  <div class="mt-auto flex gap-4 pt-2">
+    <a
+      href={project.githubLink}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="text-sm font-medium text-primary hover:underline"
+      aria-label={githubLabel}
+    >
+      GitHub
+    </a>
+    {project.demoLink && (
+      <a
+        href={project.demoLink}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-sm font-medium text-secondary hover:underline"
+        aria-label={demoLabel}
+      >
+        {demoText}
+      </a>
+    )}
+  </div>
+</article>

@@ -1,0 +1,17 @@
+<footer class="border-t border-border bg-background/80">
+  <div class="container mx-auto flex flex-col items-center justify-between gap-4 px-4 py-6 text-sm text-muted md:flex-row">
+    <p>© <span id="current-year">2026</span> Samuel Baseme Habajuwe. Tous droits réservés.</p>
+    <div class="flex items-center gap-4">
+      <a href="mailto:basemehabajuwe3@gmail.com" class="hover:text-primary">Email</a>
+      <a href="https://github.com/basemehabajuwe3-cmyk" target="_blank" rel="noreferrer" class="hover:text-primary">GitHub</a>
+      <a href="https://www.linkedin.com/in/samy-baseme-aa16ba259/" target="_blank" rel="noopener noreferrer" class="hover:text-primary">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const yearNode = document.getElementById('current-year');
+  if (yearNode) {
+    yearNode.textContent = String(new Date().getFullYear());
+  }
+</script>
