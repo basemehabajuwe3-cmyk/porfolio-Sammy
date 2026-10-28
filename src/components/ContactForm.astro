@@ -1,0 +1,121 @@
+---
+import type { Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+  endpoint?: string;
+}
+
+const { locale, endpoint } = Astro.props;
+const isFrench = locale === 'fr';
+const recipient = 'basemehabajuwe3@gmail.com';
+---
+
+<form
+  id="contact-form"
+  name={`contact-${locale}`}
+  method="POST"
+  action={endpoint ?? '#contact-form'}
+  data-email-fallback={endpoint ? undefined : 'true'}
+  data-recipient={recipient}
+  class="rounded-3xl border border-border bg-card p-6 shadow-sm md:p-8"
+>
+  <div class="grid gap-5">
+    <input
+      type="hidden"
+      name="_subject"
+      value={isFrench ? 'Nouveau message depuis le portfolio' : 'New message from the portfolio'}
+    />
+    <div class="hidden" aria-hidden="true">
+      <label for="contact-website">{isFrench ? 'Ne remplissez pas ce champ' : 'Leave this field empty'}</label>
+      <input id="contact-website" name="_gotcha" type="text" tabindex="-1" autocomplete="off" />
+    </div>
+    <div>
+      <label for="contact-name" class="mb-2 block text-sm font-medium text-foreground">
+        {isFrench ? 'Nom' : 'Name'} <span class="font-normal text-muted">({isFrench ? 'facultatif' : 'optional'})</span>
+      </label>
+      <input
+        id="contact-name"
+        name="name"
+        type="text"
+        autocomplete="name"
+        class="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground outline-none transition focus:border-primary"
+        placeholder={isFrench ? 'Votre nom' : 'Your name'}
+      />
+    </div>
+    <div>
+      <label for="contact-email" class="mb-2 block text-sm font-medium text-foreground">{isFrench ? 'E-mail' : 'Email'}</label>
+      <input
+        id="contact-email"
+        name="email"
+        type="email"
+        autocomplete="email"
+        required
+        class="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground outline-none transition focus:border-primary"
+        placeholder={isFrench ? 'vous@exemple.com' : 'you@example.com'}
+      />
+    </div>
+    <div>
+      <label for="contact-message" class="mb-2 block text-sm font-medium text-foreground">{isFrench ? 'Message' : 'Message'}</label>
+      <textarea
+        id="contact-message"
+        name="message"
+        rows="4"
+        required
+        class="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground outline-none transition focus:border-primary"
+        placeholder={isFrench ? 'Comment puis-je vous aider ?' : 'How can I help?'}
+      ></textarea>
+    </div>
+    <button
+      type="submit"
+      class="inline-flex w-full items-center justify-center rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-white transition hover:bg-primary/90"
+    >
+      {isFrench ? 'Envoyer le message' : 'Send message'}
+    </button>
+    {endpoint ? (
+      <p class="text-center text-sm text-muted">
+        {isFrench ? 'Votre message sera transmis via Formspree.' : 'Your message will be sent through Formspree.'}
+        {' '}
+        <a href={`mailto:${recipient}`} class="font-medium text-primary hover:underline">
+          {isFrench ? 'Ou écrivez-moi directement.' : 'Or email me directly.'}
+        </a>
+      </p>
+    ) : (
+      <p class="text-center text-sm text-muted">
+        {isFrench
+          ? 'Votre messagerie s’ouvrira avec le message prérempli. Vérifiez-le, puis envoyez-le.'
+          : 'Your email app will open with the message filled in. Review it, then send.'}
+        {' '}
+        <a href={`mailto:${recipient}`} class="font-medium text-primary hover:underline">
+          {isFrench ? 'Ouvrir un e-mail vide.' : 'Open a blank email.'}
+        </a>
+      </p>
+    )}
+  </div>
+</form>
+
+{!endpoint && (
+  <script>
+    const form = document.querySelector<HTMLFormElement>('[data-email-fallback="true"]');
+
+    form?.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const data = new FormData(form);
+      const name = String(data.get('name') ?? '').trim();
+      const email = String(data.get('email') ?? '').trim();
+      const message = String(data.get('message') ?? '').trim();
+      const isFrench = document.documentElement.lang === 'fr';
+      const subject = isFrench ? 'Message depuis mon portfolio' : 'Message from my portfolio';
+      const body = [
+        ...(name ? [`${isFrench ? 'Nom' : 'Name'}: ${name}`] : []),
+        `${isFrench ? 'E-mail' : 'Email'}: ${email}`,
+        '',
+        message,
+      ].join('\n');
+      const mailto = `mailto:${form.dataset.recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+      window.location.href = mailto;
+    });
+  </script>
+)}

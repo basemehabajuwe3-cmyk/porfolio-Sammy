@@ -1,12 +1,13 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import ContactForm from '../../components/ContactForm.astro';
 import { formspreeEndpoints } from '../../lib/formspree';
 ---
 
 <Layout
-  locale="en"
   title="Contact | Sammy Habajuwe"
-  description="Get in touch with Sammy Habajuwe about a project, opportunity, or web collaboration."
+  description="Contact Sammy Habajuwe about a project, collaboration, or web development opportunity."
+  locale="en"
 >
   <section class="container mx-auto px-4 py-20 md:py-24">
     <div class="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:items-start">
@@ -14,9 +15,8 @@ import { formspreeEndpoints } from '../../lib/formspree';
         <p class="text-sm font-semibold uppercase tracking-[0.2em] text-primary">Contact</p>
         <h1 class="mt-3 text-4xl font-black text-foreground md:text-5xl">Let’s talk about your project.</h1>
         <p class="mt-5 text-lg leading-8 text-muted">
-          Have an idea, need a redesign, or planning to launch a product? I can help turn it into a clear, fast, and useful solution.
+          Have a project? Send me a few details and I’ll get back to you soon.
         </p>
-
         <div class="mt-8 space-y-4">
           <a href="mailto:basemehabajuwe3@gmail.com" class="flex items-center gap-3 rounded-xl border border-border bg-card p-4 text-foreground shadow-sm hover:border-primary">
             <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">✉</span>
@@ -33,48 +33,7 @@ import { formspreeEndpoints } from '../../lib/formspree';
         </div>
       </div>
 
-      {formspreeEndpoints.en ? (
-        <form
-          name="contact-en"
-          method="POST"
-          action={formspreeEndpoints.en}
-          class="rounded-3xl border border-border bg-card p-6 shadow-sm md:p-8"
-        >
-          <div class="grid gap-5">
-            <input type="hidden" name="_subject" value="New message from the portfolio (English)" />
-            <div class="hidden" aria-hidden="true">
-              <label for="website">Leave this field empty</label>
-              <input id="website" name="_gotcha" type="text" tabindex="-1" autocomplete="off" />
-            </div>
-            <div>
-              <label for="name" class="mb-2 block text-sm font-medium text-foreground">Name</label>
-              <input id="name" name="name" type="text" required class="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground outline-none transition focus:border-primary" placeholder="Your name" />
-            </div>
-            <div>
-              <label for="email" class="mb-2 block text-sm font-medium text-foreground">Email</label>
-              <input id="email" name="email" type="email" required class="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground outline-none transition focus:border-primary" placeholder="you@example.com" />
-            </div>
-            <div>
-              <label for="message" class="mb-2 block text-sm font-medium text-foreground">Message</label>
-              <textarea id="message" name="message" rows="6" required class="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground outline-none transition focus:border-primary" placeholder="How can I help?"></textarea>
-            </div>
-            <button type="submit" class="inline-flex items-center justify-center rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-white transition hover:bg-primary/90">
-              Send message
-            </button>
-            <p class="text-sm text-muted">Your message will be sent through Formspree.</p>
-          </div>
-        </form>
-      ) : (
-        <div class="rounded-3xl border border-border bg-card p-6 shadow-sm md:p-8">
-          <p class="font-semibold text-foreground">The contact form is not configured yet.</p>
-          <p class="mt-2 text-sm leading-6 text-muted">
-            In the meantime, you can contact me directly by email.
-          </p>
-          <a href="mailto:basemehabajuwe3@gmail.com" class="mt-4 inline-flex rounded-lg bg-primary px-5 py-3 text-sm font-semibold text-white transition hover:bg-primary/90">
-            Send an email
-          </a>
-        </div>
-      )}
+      <ContactForm locale="en" endpoint={formspreeEndpoints.en} />
     </div>
   </section>
 </Layout>

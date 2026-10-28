@@ -2,12 +2,18 @@
 import Layout from '../../layouts/Layout.astro';
 import { experiences } from '../../data/experience';
 import { skillGroups } from '../../data/skills';
+
+const skillTitles: Record<string, string> = {
+  Frontend: 'Frontend',
+  Backend: 'Backend',
+  'Outils & workflow': 'Tools & workflow',
+};
 ---
 
 <Layout
-  locale="en"
   title="About | Sammy Habajuwe"
   description="Learn about Sammy Habajuwe, his experience, skills, and approach to building useful digital experiences."
+  locale="en"
 >
   <section class="container mx-auto px-4 py-20 md:py-24">
     <div class="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
@@ -15,10 +21,10 @@ import { skillGroups } from '../../data/skills';
         <p class="text-sm font-semibold uppercase tracking-[0.2em] text-primary">About</p>
         <h1 class="mt-3 text-4xl font-black text-foreground md:text-5xl">I build products that are easy to use.</h1>
         <p class="mt-6 text-lg leading-8 text-muted">
-          I am a developer who cares about creating clear, useful, and lasting web experiences. My goal is to combine design, technical quality, and business value to help companies serve their customers better.
+          I am a developer passionate about creating clear, useful, and lasting web experiences. My goal is to combine design, technical quality, and business value to help companies deliver better services to their customers.
         </p>
         <p class="mt-4 text-lg leading-8 text-muted">
-          I enjoy turning complex ideas into clear interfaces, working closely with product teams, and building solutions that genuinely help users.
+          I enjoy turning complex ideas into intuitive interfaces, working closely with product teams, and designing solutions that genuinely serve their users.
         </p>
       </div>
       <div class="rounded-3xl border border-border bg-card p-8 shadow-sm">
@@ -49,9 +55,7 @@ import { skillGroups } from '../../data/skills';
             <p class="mt-4 leading-7 text-muted">{job.descriptionEn ?? job.description}</p>
             {job.stack && (
               <div class="mt-4 flex flex-wrap gap-2">
-                {job.stack.map((item) => (
-                  <span class="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">{item}</span>
-                ))}
+                {job.stack.map((item) => <span class="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">{item}</span>)}
               </div>
             )}
             {(job.missionEn ?? job.mission) && (
@@ -72,11 +76,9 @@ import { skillGroups } from '../../data/skills';
       <div class="grid gap-6 md:grid-cols-3">
         {skillGroups.map((group) => (
           <div class="rounded-2xl border border-border bg-card p-6 shadow-sm">
-            <h3 class="mb-4 text-xl font-semibold text-foreground">{group.title === 'Outils & workflow' ? 'Tools & workflow' : group.title}</h3>
+            <h3 class="mb-4 text-xl font-semibold text-foreground">{skillTitles[group.title] ?? group.title}</h3>
             <div class="flex flex-wrap gap-2">
-              {group.items.map((item) => (
-                <span class="rounded-full bg-background px-3 py-1.5 text-sm text-muted">{item}</span>
-              ))}
+              {group.items.map((item) => <span class="rounded-full bg-background px-3 py-1.5 text-sm text-muted">{item}</span>)}
             </div>
           </div>
         ))}

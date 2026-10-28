@@ -1,8 +1,6 @@
 
 ---
-import ThemeToggle from './ThemeToggle.astro';
-import LanguageSwitcher from './LanguageSwitcher.astro';
-import { navigation, type Locale } from '../i18n';
+import { getLocalizedPath, navigation, type Locale } from '../i18n';
 
 interface Props {
   locale?: Locale;
@@ -10,29 +8,59 @@ interface Props {
 
 const { locale = 'fr' } = Astro.props;
 const links = navigation[locale];
-const homePath = locale === 'fr' ? '/' : '/en/';
-const navLabel = locale === 'fr' ? 'Navigation principale' : 'Main navigation';
-const mobileMenuLabel = locale === 'fr' ? 'Ouvrir le menu' : 'Open menu';
+const languagePath = getLocalizedPath(Astro.url.pathname, locale === 'fr' ? 'en' : 'fr');
+const languageLabel = locale === 'fr' ? 'EN' : 'FR';
+const languageAriaLabel = locale === 'fr' ? 'Switch to English' : 'Passer en français';
+const lightThemeLabel = locale === 'fr' ? 'Clair' : 'Light';
+const darkThemeLabel = locale === 'fr' ? 'Sombre' : 'Dark';
 ---
 
 <header class="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-sm">
   <div class="container mx-auto flex items-center justify-between px-4 py-4">
-    <a href={homePath} class="text-xl font-bold text-foreground">Sammy Habajuwe</a>
+    <a href={locale === 'fr' ? '/' : '/en/'} class="text-base font-bold text-foreground sm:text-xl">Sammy Habajuwe</a>
 
-    <nav class="hidden items-center gap-6 md:flex" aria-label={navLabel}>
-      {links.map((link) => (
-        <a href={link.path} class="text-sm text-muted hover:text-primary">{link.label}</a>
-      ))}
-      <LanguageSwitcher locale={locale} />
-      <ThemeToggle />
-    </nav>
+    <div class="flex items-center gap-2 sm:gap-4">
+      <nav class="hidden items-center gap-6 md:flex" aria-label={locale === 'fr' ? 'Navigation principale' : 'Main navigation'}>
+        {links.map((link) => (
+          <a href={link.path} class="text-sm text-muted hover:text-primary">{link.label}</a>
+        ))}
+      </nav>
 
-    <div class="flex items-center gap-3 md:hidden">
-      <ThemeToggle />
+      <div class="flex items-center gap-1.5 sm:gap-2">
+        <a
+          href={languagePath}
+          class="inline-flex h-9 min-w-9 items-center justify-center rounded-lg border border-border px-2 text-xs font-semibold text-foreground hover:border-primary hover:text-primary sm:text-sm"
+          aria-label={languageAriaLabel}
+          lang={locale === 'fr' ? 'en' : 'fr'}
+        >
+          {languageLabel}
+        </a>
+        <div class="inline-flex items-center rounded-lg border border-border p-0.5" role="group" aria-label={locale === 'fr' ? 'Choisir le thème' : 'Choose theme'}>
+          <button
+            id="theme-light"
+            class="rounded-md px-2 py-1.5 text-xs font-medium text-muted transition-colors hover:text-primary sm:px-2.5"
+            type="button"
+            data-theme-mode="light"
+            aria-pressed="false"
+          >
+            {lightThemeLabel}
+          </button>
+          <button
+            id="theme-dark"
+            class="rounded-md px-2 py-1.5 text-xs font-medium text-muted transition-colors hover:text-primary sm:px-2.5"
+            type="button"
+            data-theme-mode="dark"
+            aria-pressed="false"
+          >
+            {darkThemeLabel}
+          </button>
+        </div>
+      </div>
+
       <button
         id="mobile-menu-button"
-        class="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border text-foreground"
-        aria-label={mobileMenuLabel}
+        class="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border text-foreground md:hidden"
+        aria-label={locale === 'fr' ? 'Ouvrir le menu' : 'Open menu'}
         aria-expanded="false"
         aria-controls="mobile-menu"
         type="button"
@@ -45,13 +73,10 @@ const mobileMenuLabel = locale === 'fr' ? 'Ouvrir le menu' : 'Open menu';
   </div>
 
   <div id="mobile-menu" class="hidden border-t border-border md:hidden">
-    <nav class="flex flex-col gap-2 px-4 py-4" aria-label={navLabel}>
+    <nav class="flex flex-col gap-2 px-4 py-4" aria-label={locale === 'fr' ? 'Navigation principale' : 'Main navigation'}>
       {links.map((link) => (
         <a href={link.path} class="py-2 text-sm text-muted hover:text-primary">{link.label}</a>
       ))}
-      <div class="pt-2">
-        <LanguageSwitcher locale={locale} />
-      </div>
     </nav>
   </div>
 </header>
@@ -59,6 +84,38 @@ const mobileMenuLabel = locale === 'fr' ? 'Ouvrir le menu' : 'Open menu';
 <script>
   const mobileMenuButton = document.getElementById('mobile-menu-button');
   const mobileMenu = document.getElementById('mobile-menu');
+  const themeButtons = document.querySelectorAll<HTMLButtonElement>('[data-theme-mode]');
+
+  const applyTheme = (mode: 'light' | 'dark') => {
+    const isDark = mode === 'dark';
+    document.documentElement.classList.toggle('dark', isDark);
+    themeButtons.forEach((button) => {
+      const isSelected = button.dataset.themeMode === mode;
+      button.setAttribute('aria-pressed', String(isSelected));
+      button.classList.toggle('bg-primary/10', isSelected);
+      button.classList.toggle('text-primary', isSelected);
+      button.classList.toggle('text-muted', !isSelected);
+    });
+
+    try {
+      localStorage.setItem('portfolio-theme', mode);
+    } catch (error) {
+      console.error('Unable to save the theme preference.', error);
+    }
+  };
+
+  const initialMode = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+  themeButtons.forEach((button) => {
+    const isSelected = button.dataset.themeMode === initialMode;
+    button.setAttribute('aria-pressed', String(isSelected));
+    button.classList.toggle('bg-primary/10', isSelected);
+    button.classList.toggle('text-primary', isSelected);
+    button.classList.toggle('text-muted', !isSelected);
+    button.addEventListener('click', () => {
+      const mode = button.dataset.themeMode;
+      if (mode === 'light' || mode === 'dark') applyTheme(mode);
+    });
+  });
 
   mobileMenuButton?.addEventListener('click', () => {
     const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';

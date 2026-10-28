@@ -2,7 +2,7 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { getLocalizedPath, type Locale } from '../i18n';
+import type { Locale } from '../i18n';
 
 export interface Props {
   title: string;
@@ -24,22 +24,24 @@ const { title, description, locale = 'fr' } = Astro.props;
     <meta property="og:type" content="website" />
     <meta property="og:locale" content={locale === 'fr' ? 'fr_FR' : 'en_US'} />
     <meta property="og:image" content="/images/photo-profil.svg" />
-    <link rel="alternate" hreflang="fr" href={getLocalizedPath(Astro.url.pathname, 'fr')} />
-    <link rel="alternate" hreflang="en" href={getLocalizedPath(Astro.url.pathname, 'en')} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>{title}</title>
     <script is:inline>
-      (() => {
-        try {
-          const storedTheme = localStorage.getItem('theme');
-          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          const shouldUseDark = storedTheme ? storedTheme === 'dark' : prefersDark;
-          document.documentElement.classList.toggle('dark', shouldUseDark);
-        } catch (error) {
-          document.documentElement.classList.remove('dark');
-        }
-      })();
+      try {
+        const savedTheme = localStorage.getItem('portfolio-theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.classList.toggle(
+          'dark',
+          savedTheme ? savedTheme === 'dark' : prefersDark,
+        );
+      } catch (error) {
+        console.error('Unable to read the saved theme preference.', error);
+        document.documentElement.classList.toggle(
+          'dark',
+          window.matchMedia('(prefers-color-scheme: dark)').matches,
+        );
+      }
     </script>
+    <title>{title}</title>
   </head>
   <body class="min-h-screen bg-background text-foreground">
     <div class="flex min-h-screen flex-col">
