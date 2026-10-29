@@ -10,6 +10,7 @@ export interface Props {
 
 const { project, locale = 'fr' } = Astro.props;
 const projectDescription = locale === 'en' ? project.descriptionEn ?? project.description : project.description;
+const projectContribution = locale === 'en' ? project.contributionEn : project.contribution;
 const imageAlt = locale === 'fr' ? `Capture du projet ${project.title}` : `Screenshot of the ${project.title} project`;
 const githubLabel = locale === 'fr' ? `Voir le repository GitHub de ${project.title}` : `View the ${project.title} GitHub repository`;
 const demoLabel = locale === 'fr' ? `Voir la démonstration de ${project.title}` : `View the ${project.title} demo`;
@@ -30,6 +31,11 @@ const demoText = locale === 'fr' ? 'Démo' : 'Live demo';
   <div class="flex flex-1 flex-col gap-3">
     <h3 class="text-xl font-semibold text-foreground">{project.title}</h3>
     <p class="text-sm leading-6 text-muted">{projectDescription}</p>
+    {projectContribution && (
+      <p class="rounded-lg bg-primary/5 px-3 py-2 text-sm leading-6 text-muted">
+        <span class="font-semibold text-foreground">{locale === 'fr' ? 'Ma contribution' : 'My contribution'} :</span> {projectContribution}
+      </p>
+    )}
 
     <div class="flex flex-wrap gap-2">
       {project.technologies.map((tech) => (

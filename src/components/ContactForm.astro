@@ -18,9 +18,18 @@ const recipient = 'basemehabajuwe3@gmail.com';
   action={endpoint ?? '#contact-form'}
   data-email-fallback={endpoint ? undefined : 'true'}
   data-recipient={recipient}
-  class="rounded-3xl border border-border bg-card p-6 shadow-sm md:p-8"
+  class="h-full rounded-3xl border border-border bg-card p-6 shadow-sm md:p-8"
 >
   <div class="grid gap-5">
+    <div class="mb-1">
+      <p class="text-sm font-semibold uppercase tracking-[0.2em] text-primary">{isFrench ? 'Votre message' : 'Your message'}</p>
+      <h2 class="mt-2 text-2xl font-bold text-foreground">{isFrench ? 'Décrivez votre besoin' : 'Tell me what you need'}</h2>
+      <p class="mt-2 text-sm leading-6 text-muted">
+        {isFrench
+          ? 'Pour une demande de devis, précisez votre projet, vos objectifs et vos délais.'
+          : 'For a project inquiry, include your goals, requirements, and timeline.'}
+      </p>
+    </div>
     <input
       type="hidden"
       name="_subject"
