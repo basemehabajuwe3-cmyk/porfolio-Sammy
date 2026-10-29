@@ -6,6 +6,23 @@ const routePairs: [string, string][] = [
   ['/a-propos', '/en/about'],
   ['/contact', '/en/contact'],
   ['/merci', '/en/thank-you'],
+  ['/blog', '/en/blog'],
+  [
+    '/blog/concevoir-formulaires-accessibles',
+    '/en/blog/designing-accessible-web-forms',
+  ],
+  [
+    '/blog/ameliorer-performance-page-web',
+    '/en/blog/improving-web-page-performance',
+  ],
+  [
+    '/blog/organiser-composants-interface',
+    '/en/blog/organizing-interface-components',
+  ],
+  [
+    '/blog/journalisme-technologies-innovation',
+    '/en/blog/from-journalism-to-digital',
+  ],
 ];
 
 export function getLocalizedPath(pathname: string, locale: Locale): string {
@@ -28,12 +45,14 @@ export const navigation = {
     { label: 'Accueil', path: '/' },
     { label: 'Projets', path: '/projets' },
     { label: 'À propos', path: '/a-propos' },
+    { label: 'Blog', path: '/blog' },
     { label: 'Contact', path: '/contact' },
   ],
   en: [
     { label: 'Home', path: '/en/' },
     { label: 'Projects', path: '/en/projects' },
     { label: 'About', path: '/en/about' },
+    { label: 'Blog', path: '/en/blog' },
     { label: 'Contact', path: '/en/contact' },
   ],
 } satisfies Record<Locale, { label: string; path: string }[]>;

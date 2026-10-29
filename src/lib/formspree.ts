@@ -1,7 +1,8 @@
 const endpointPattern = /^https:\/\/formspree\.io\/f\/[A-Za-z0-9]+$/;
+const defaultEndpoint = 'https://formspree.io/f/mnppzlrq';
 
 function getEndpoint(name: string): string | undefined {
-  const endpoint = import.meta.env[name]?.trim();
+  const endpoint = import.meta.env[name]?.trim() || defaultEndpoint;
 
   if (endpoint && !endpointPattern.test(endpoint)) {
     throw new Error(
@@ -9,7 +10,7 @@ function getEndpoint(name: string): string | undefined {
     );
   }
 
-  return endpoint || undefined;
+  return endpoint;
 }
 
 export const formspreeEndpoints = {
