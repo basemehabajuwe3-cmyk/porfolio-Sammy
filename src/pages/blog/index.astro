@@ -37,8 +37,6 @@ const formatDate = (date: string) =>
             <span class="font-semibold text-primary">{post.category}</span>
             <span aria-hidden="true">·</span>
             <time datetime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
-            <span aria-hidden="true">·</span>
-            <span>{post.readingTime} de lecture</span>
           </div>
           <h2 class="mt-4 text-2xl font-bold text-foreground">
             <a class="transition-colors hover:text-primary" href={`/blog/${post.slug}`}>

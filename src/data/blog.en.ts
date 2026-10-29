@@ -8,7 +8,6 @@ export const englishBlogPosts: BlogPost[] = [
       'Clear labels, understandable errors, and keyboard navigation make forms easier for everyone to use.',
     category: 'Accessibility',
     publishedAt: '2026-10-26',
-    readingTime: '4 min read',
     tags: ['Accessibility', 'HTML', 'UX'],
     introduction:
       'A form is often the starting point for a sign-up, request, or purchase. A few design choices can make it easier to use, including with a keyboard or screen reader.',
@@ -43,7 +42,6 @@ export const englishBlogPosts: BlogPost[] = [
       'Measure first, then remove unnecessary resources and optimize images before trying more complex optimizations.',
     category: 'Performance',
     publishedAt: '2026-10-26',
-    readingTime: '5 min read',
     tags: ['Performance', 'Web', 'Images'],
     introduction:
       'A fast page helps visitors reach content sooner and works better on slow connections. To make meaningful progress, start by finding what is actually slowing the page down.',
@@ -78,7 +76,6 @@ export const englishBlogPosts: BlogPost[] = [
       'Reusable components make products easier to evolve when each component has a clear responsibility and well-chosen props.',
     category: 'Development',
     publishedAt: '2026-10-26',
-    readingTime: '4 min read',
     tags: ['Components', 'Architecture', 'TypeScript'],
     introduction:
       'Breaking an interface into components can make code easier to understand and maintain. It is most useful when it clarifies each part’s role, not simply when a file gets long.',
@@ -113,7 +110,6 @@ export const englishBlogPosts: BlogPost[] = [
       'My journalism background introduced me to current affairs, new technologies, and innovation while building skills I now use in digital work.',
     category: 'Background',
     publishedAt: '2026-10-26',
-    readingTime: '4 min read',
     tags: ['Journalism', 'Technology', 'Communication'],
     introduction:
       'Journalism taught me to explore subjects, find useful information, and make it understandable. That approach also shapes the way I work in digital.',

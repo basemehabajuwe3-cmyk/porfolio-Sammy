@@ -10,7 +10,6 @@ export interface BlogPost {
   excerpt: string;
   category: string;
   publishedAt: string;
-  readingTime: string;
   tags: string[];
   introduction: string;
   sections: BlogSection[];
@@ -24,7 +23,6 @@ export const blogPosts: BlogPost[] = [
       'Des libellés explicites, des erreurs compréhensibles et une navigation au clavier rendent les formulaires plus simples pour tout le monde.',
     category: 'Accessibilité',
     publishedAt: '2026-10-26',
-    readingTime: '4 min',
     tags: ['Accessibilité', 'HTML', 'UX'],
     introduction:
       'Un formulaire est souvent le point de départ d’une inscription, d’une demande ou d’un achat. Quelques choix de conception permettent de le rendre plus facile à utiliser, y compris avec un clavier ou un lecteur d’écran.',
@@ -59,7 +57,6 @@ export const blogPosts: BlogPost[] = [
       'Commencez par mesurer, puis réduisez les ressources inutiles et optimisez les images avant de chercher des optimisations complexes.',
     category: 'Performance',
     publishedAt: '2026-10-26',
-    readingTime: '5 min',
     tags: ['Performance', 'Web', 'Images'],
     introduction:
       'Une page rapide aide les visiteurs à accéder plus vite au contenu et fonctionne mieux sur les connexions lentes. Pour progresser efficacement, commencez par identifier ce qui ralentit réellement la page.',
@@ -94,7 +91,6 @@ export const blogPosts: BlogPost[] = [
       'Des composants réutilisables facilitent les évolutions, à condition de leur donner une responsabilité claire et des propriétés bien choisies.',
     category: 'Développement',
     publishedAt: '2026-10-26',
-    readingTime: '4 min',
     tags: ['Composants', 'Architecture', 'TypeScript'],
     introduction:
       'Découper une interface en composants peut rendre le code plus facile à comprendre et à faire évoluer. Le découpage est utile lorsqu’il clarifie le rôle de chaque partie, pas simplement parce qu’un fichier devient long.',
@@ -129,7 +125,6 @@ export const blogPosts: BlogPost[] = [
       'Mon parcours en journalisme m’a amené à explorer l’actualité, les nouvelles technologies et l’innovation, tout en développant des compétences utiles dans le numérique.',
     category: 'Parcours',
     publishedAt: '2026-10-26',
-    readingTime: '4 min',
     tags: ['Journalisme', 'Technologies', 'Communication'],
     introduction:
       'Mon expérience en journalisme m’a appris à m’intéresser aux sujets, à rechercher les informations utiles et à les rendre compréhensibles. Cette démarche accompagne aussi mon travail dans le numérique.',
